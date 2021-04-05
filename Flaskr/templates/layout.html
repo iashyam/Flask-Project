@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/style1.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  {% block style %}
+  {% endblock %}
+  {% if title %}
+  <title>{{title}}| The Rest Frame</title>
+  {% else %}
+  <title>The Rest Frame</title>
+  {% endif %}
+</head>
+
+<body>
+
+  <div class="flex-container ">
+    
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('home')}}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('blog')}}">Blog</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('about')}}">About</a>
+    </li>
+  </ul>
+  <ul class="nav .justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('register')}}">Sign up</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('login')}}">Login</a>
+    </li>
+  </ul>
+  </div>
+
+      <h1 id="main-header">The Rest Frame</h1>
+      {% block wrapper %}
+      {% endblock %}
+
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+        integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
