@@ -1,25 +1,51 @@
 {% extends 'layout.html'%}
 {%block wrapper%}
 {{form.hidden_tag()}}
-<div class="card mx-auto", style="width: 40%;">
-<form method="POST", action="">
-    <div class="form w-auto shadow-sm p-3 mb-5 bg-white rounded " >
-        <div class="form-group">
-            {{form.username.label(class="form-control-label")}}
-            {{form.username(class="form-control", id='name')}}
+<div class="card mx-auto" , style="width: 40%;">
+    <form method="POST" , action="">
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+        <div class="form w-auto shadow-sm p-3 mb-5 bg-white rounded ">
+            <div class="form-group">
+                {{form.username.label(class="form-control-label")}}
+                {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                {{form.username(class="form-control", id='name')}}
+                <small><span style="color: red;">{{error}}</span></small>
+                {% endfor %}
+
+                {%else%}
+                {{form.username(class="form-control", id='name')}}
+                {% endif %}
+
+
+            </div>
+            <div class="form-group">
+                {{form.password.label(class="form-control-label")}}
+                {% if form.password.errors %}
+                {{form.password(class="form-control", id='name')}}
+                {% for error in form.password.errors %}
+                <small><span style="color: red;">{{error}}</span></small>
+                {% endfor %}
+                {%else%}
+                {{form.password(class="form-control", id='name')}}
+                {% endif %}
+            </div>
+            <div class="form-check">
+                {{form.remember_me(class="form-check-input", id="autoSizingCheck")}}
+                {{form.remember_me.label(class="form-check-label")}}
+            </div>
+            <div class="btn">
+                {{form.submit(class='btn btn-primary')}}
+            </div>
+
+            <div class="pt-3">
+                <small class="text-muted">
+                    New to The Rest Frame? <a href="{{url_for('register')}}">Create Account</a>
+                </small>
+            </div>
         </div>
-        <div class="form-group">
-            {{form.password.label(class="form-control-label")}}
-            {{form.password(class="form-control", id='name')}}
-        </div>
-        {{form.submit(class="btn btn-outline-info")}}
-        <div class="pt-3">
-            <small class="text-muted">
-                New to The Rest Frame? <a href="{{url_for('register')}}">Create Account</a>
-            </small>
-        </div>
-    </div>
-</form>
+    </form>
 </div>
 
 {%endblock%}

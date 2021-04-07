@@ -1,11 +1,11 @@
-from flask import Flask, render_template, url_for, request
-from forms import registerationForm, loginForm
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '1dee4de2f1e0017b7aba8b5b8b2e4280'
+from Flaskr import app
+from flask import render_template, url_for, request, redirect, flash
+from Flaskr.forms import loginForm, registerationForm
+
 
 #creating a home page
 @app.route('/')
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
 
@@ -19,12 +19,22 @@ def blog():
 def about():
     return render_template('about.html')
 
-@app.route('/sinup')
+@app.route('/sinup', methods=['GET', 'POST'])
 def register():
     form = registerationForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        flash(f'Account created for {form.username.data}', category='success')
+        return redirect(url_for('home'))
+    elif not form.validate_on_submit() and request.method == 'POST':
+        flash(f'Details are not valid!')
     return render_template('auth/register.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form=loginForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        flash(f'Logged in as {form.username.data}', category='success')
+        return redirect(url_for('home'))
+    elif not form.validate_on_submit() and request.method == 'POST':
+        flash(f'Details are not valid!')
     return render_template('auth/login.html', form=form)

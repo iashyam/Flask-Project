@@ -11,7 +11,7 @@
   {% block style %}
   {% endblock %}
   {% if title %}
-  <title>{{title}}| The Rest Frame</title>
+  <title>{{title}}| The Rest Frame</title> 
   {% else %}
   <title>The Rest Frame</title>
   {% endif %}
@@ -41,8 +41,19 @@
     </li>
   </ul>
   </div>
+  <h1 id="main-header">The Rest Frame</h1>
 
-      <h1 id="main-header">The Rest Frame</h1>
+  <div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages%}
+    {% for message in messages%}
+    <div class="alert alert-success">{{message}}</div>
+    
+    {% endfor%}
+    {% endif %}
+    {% endwith %}
+  </div>
+      
       {% block wrapper %}
       {% endblock %}
 
